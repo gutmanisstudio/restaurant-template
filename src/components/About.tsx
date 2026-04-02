@@ -1,5 +1,7 @@
 'use client'
 import FadeIn from './FadeIn'
+import useIsMobile from '@/hooks/useIsMobile'
+import { restaurant } from '@/config/restaurant'
 
 const features = [
   { title: 'Reserve at the Table or Online', desc: 'Skip the wait and book ahead, or walk in and let us take care of everything.',
@@ -13,14 +15,15 @@ const features = [
 ]
 
 export default function About() {
+  const isMobile = useIsMobile()
   return (
-    <section id="about" style={{ background: '#FDFCFA', padding: '7rem 4rem' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+    <section id="about" style={{ background: '#FDFCFA', padding: isMobile ? '3rem 1.5rem' : '7rem 4rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '2rem' : '5rem', alignItems: 'center' }}>
 
         <FadeIn direction="left">
           <div style={{ position: 'relative', borderRadius: '20px', overflow: 'hidden', aspectRatio: '4/5', background: '#0a0505', boxShadow: '0 30px 80px rgba(200,16,46,0.12)' }}>
             <video autoPlay loop muted playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
-              <source src="/videos/worran eating.mp4" type="video/mp4" />
+              <source src={restaurant.aboutVideo} type="video/mp4" />
             </video>
             <img src="/images/interior.jpg" alt="FLŌ" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} onError={e => (e.target as HTMLImageElement).style.display = 'none'} />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '4px', background: '#C8102E' }} />

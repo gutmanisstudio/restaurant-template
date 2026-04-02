@@ -1,18 +1,14 @@
 'use client'
 import FadeIn from './FadeIn'
+import useIsMobile from '@/hooks/useIsMobile'
+import { restaurant } from '@/config/restaurant'
 
-const reviews = [
-  { stars: 5, text: 'The tartare is absolutely unreal. Best starter in Riga, no contest. That sauce had me ordering a second plate.', name: 'Marta K.', time: '2 weeks ago', tags: ['Tartare', 'Starters'] },
-  { stars: 5, text: 'FLŌ hosted our company dinner for 40 people on the riverside. Flawless from start to finish — food, service, atmosphere.', name: 'Andris B.', time: '1 week ago', tags: ['Events', 'Groups'] },
-  { stars: 5, text: 'Finally a spot in Riga that takes its wine list seriously. The sea bass with brown butter is something else entirely.', name: 'Sofia L.', time: '3 days ago', tags: ['Wine', 'Mains'] },
-  { stars: 5, text: 'Brought my family for a birthday. The ribeye alone is worth the visit — 28-day aged, perfectly cooked.', name: 'Jānis R.', time: '1 month ago', tags: ['Family', 'Mains'] },
-  { stars: 5, text: 'The burrata with heirloom tomato is the best I have had outside of Italy. We come back every month.', name: 'Elīna P.', time: '2 weeks ago', tags: ['Starters', 'Regular'] },
-  { stars: 5, text: 'Stumbled in at 11pm Saturday. Fresh food, fast service. The risotto at that hour was outstanding.', name: 'Dāvids K.', time: '5 days ago', tags: ['Late Night', 'Mains'] },
-]
+const reviews = restaurant.reviews
 
 export default function Reviews() {
+  const isMobile = useIsMobile()
   return (
-    <section id="reviews" style={{ background: '#F8F4EF', padding: '7rem 4rem' }}>
+    <section id="reviews" style={{ background: '#F8F4EF', padding: isMobile ? '3rem 1.5rem' : '7rem 4rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -25,7 +21,7 @@ export default function Reviews() {
           </div>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.5rem' }}>
           {reviews.map((r, i) => (
             <FadeIn key={i} delay={i * 0.08}>
               <div style={{ background: '#FDFCFA', borderRadius: '16px', padding: '1.8rem', border: '1px solid rgba(200,16,46,0.08)', transition: 'transform 0.2s, box-shadow 0.2s' }}

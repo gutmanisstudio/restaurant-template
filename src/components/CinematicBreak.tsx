@@ -1,10 +1,11 @@
 'use client'
+import { restaurant } from '@/config/restaurant'
 
 export default function CinematicBreak() {
   return (
     <section style={{ position: 'relative', height: '70vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <video autoPlay loop muted playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-        <source src="/videos/closeup sauce pour.mp4" type="video/mp4" />
+        <source src={restaurant.cinematicVideo} type="video/mp4" />
       </video>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,5,5,0.5), rgba(200,16,46,0.6))', zIndex: 1 }} />
       <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 2rem' }}>

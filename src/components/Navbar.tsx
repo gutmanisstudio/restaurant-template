@@ -1,9 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
+import useIsMobile from '@/hooks/useIsMobile'
+import { restaurant } from '@/config/restaurant'
 
 const links = ['Home', 'About', 'Menu', 'Gallery', 'Reviews', 'Contact']
 
 export default function Navbar() {
+  const isMobile = useIsMobile()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function Navbar() {
         </svg>
       </a>
 
-      <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
+      <ul style={{ display: isMobile ? 'none' : 'flex', gap: '2rem', listStyle: 'none' }}>
         {links.map(l => (
           <li key={l}>
             <a href={`#${l.toLowerCase()}`} style={{
@@ -47,7 +50,7 @@ export default function Navbar() {
 
       <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
         {/* Phone SVG icon */}
-        <a href="tel:+37127012661" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
+        <a href={`tel:${restaurant.phone}`} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
           onMouseEnter={e => e.currentTarget.style.color = '#C8102E'}
           onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
         >

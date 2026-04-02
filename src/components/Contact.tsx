@@ -1,11 +1,14 @@
 'use client'
 import FadeIn from './FadeIn'
+import useIsMobile from '@/hooks/useIsMobile'
+import { restaurant } from '@/config/restaurant'
 
 export default function Contact() {
+  const isMobile = useIsMobile()
   return (
     <>
-      <section id="contact" style={{ background: '#FDFCFA', padding: '6rem 4rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '5rem', alignItems: 'center' }}>
+      <section id="contact" style={{ background: '#FDFCFA', padding: isMobile ? '3rem 1.5rem' : '6rem 4rem' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 2fr', gap: isMobile ? '2rem' : '5rem', alignItems: 'center' }}>
           <FadeIn direction="left">
             <div>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C8102E', background: 'rgba(200,16,46,0.08)', padding: '0.4rem 1rem', borderRadius: '999px', border: '1px solid rgba(200,16,46,0.2)', marginBottom: '1.5rem' }}>
@@ -22,7 +25,7 @@ export default function Contact() {
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.9rem', fontWeight: 300, color: '#6B6460', lineHeight: 1.8, marginBottom: '2rem' }}>
                 Questions, catering enquiries, or just want to say hi? Drop us a line and we&apos;ll get back fast.
               </p>
-              <a href="mailto:reservations@floresto.lv" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#C8102E', color: '#FDFCFA', fontFamily: "'DM Sans', sans-serif", fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0.85rem 2rem', borderRadius: '999px', textDecoration: 'none', transition: 'all 0.2s' }}
+              <a href={`mailto:${restaurant.email}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#C8102E', color: '#FDFCFA', fontFamily: "'DM Sans', sans-serif", fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0.85rem 2rem', borderRadius: '999px', textDecoration: 'none', transition: 'all 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.background = '#8B0A1F'; e.currentTarget.style.transform = 'scale(1.04)' }}
                 onMouseLeave={e => { e.currentTarget.style.background = '#C8102E'; e.currentTarget.style.transform = 'scale(1)' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -33,22 +36,22 @@ export default function Contact() {
             </div>
           </FadeIn>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '1rem' }}>
             {[
               {
-                label: 'Call Us', value: '+371 27012661',
+                label: 'Call Us', value: restaurant.phone,
                 svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
               },
               {
-                label: 'Email Us', value: 'reservations@floresto.lv',
+                label: 'Email Us', value: restaurant.email,
                 svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               },
               {
-                label: 'Find Us', value: '11.novembra krastmala 13, Rīga',
+                label: 'Find Us', value: restaurant.address,
                 svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
               },
               {
-                label: 'Hours', value: 'Daily 12:00–22:00\nFri–Sat until 23:30',
+                label: 'Hours', value: `${restaurant.hours.weekday}\n${restaurant.hours.friday}`,
                 svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C8102E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               },
             ].map((item, i) => (

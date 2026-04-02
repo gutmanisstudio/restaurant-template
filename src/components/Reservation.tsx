@@ -1,8 +1,11 @@
 'use client'
 import { useState } from 'react'
 import FadeIn from './FadeIn'
+import useIsMobile from '@/hooks/useIsMobile'
+import { restaurant } from '@/config/restaurant'
 
 export default function Reservation() {
+  const isMobile = useIsMobile()
   const [form, setForm] = useState({ firstName: '', lastName: '', date: '', time: '19:00', guests: '2', phone: '', email: '', notes: '' })
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setForm({ ...form, [e.target.name]: e.target.value })
 
@@ -10,17 +13,17 @@ export default function Reservation() {
   const lbl: React.CSSProperties = { fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: 'rgba(14,10,8,0.4)', display: 'block', marginBottom: '0.4rem' }
 
   return (
-    <section id="reserve" style={{ background: 'var(--red)', padding: '7rem 2rem' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '6rem', alignItems: 'center' }}>
+    <section id="reserve" style={{ background: 'var(--red)', padding: isMobile ? '3rem 1.5rem' : '7rem 2rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.2fr', gap: isMobile ? '2rem' : '6rem', alignItems: 'center' }}>
       <FadeIn direction="left">
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(14,10,8,0.55)', marginBottom: '1rem' }}>Make a Reservation</p>
         <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3rem, 5vw, 5rem)', letterSpacing: '0.06em', color: 'var(--white)', lineHeight: 1, marginBottom: '1.5rem' }}>JOIN US FOR<br />AN UNFORGETTABLE<br />EVENING</h2>
         <div style={{ width: '40px', height: '2px', background: 'rgba(14,10,8,0.4)', marginBottom: '2.5rem' }} />
         {[
-          { label: 'Address', value: '11.novembra krastmala 13\nRīga, LV-1050' },
-          { label: 'Hours', value: 'Mon–Thu: 12:00–22:00\nFri–Sat: 12:00–23:30\nSun: 12:00–21:00' },
-          { label: 'Phone', value: '+371 27012661' },
-          { label: 'Email', value: 'reservations@floresto.lv' },
+          { label: 'Address', value: restaurant.address.replace(', ', '\n') },
+          { label: 'Hours', value: `${restaurant.hours.weekday}\n${restaurant.hours.friday}\n${restaurant.hours.sunday}` },
+          { label: 'Phone', value: restaurant.phone },
+          { label: 'Email', value: restaurant.email },
         ].map(item => (
           <div key={item.label} style={{ display: 'flex', gap: '1.2rem', marginBottom: '1.2rem' }}>
             <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(14,10,8,0.4)', minWidth: '70px', paddingTop: '0.15rem' }}>{item.label}</span>

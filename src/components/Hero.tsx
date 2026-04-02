@@ -1,16 +1,17 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { restaurant } from '@/config/restaurant'
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [loaded, setLoaded] = useState(false)
   useEffect(() => { const t = setTimeout(() => setLoaded(true), 100); return () => clearTimeout(t) }, [])
-  useEffect(() => { if (videoRef.current) videoRef.current.currentTime = 3.3 }, [])
+  useEffect(() => { if (videoRef.current) videoRef.current.currentTime = restaurant.heroVideoStart }, [])
 
   return (
     <section id="home" style={{ position: 'relative', height: '100vh', minHeight: '700px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
       <video ref={videoRef} autoPlay loop muted playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-        <source src="/videos/intro.mp4" type="video/mp4" />
+        <source src={restaurant.heroVideo} type="video/mp4" />
       </video>
       <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(to bottom, rgba(10,5,5,0.45) 0%, rgba(10,5,5,0.2) 50%, rgba(200,16,46,0.8) 100%)' }} />
 
@@ -26,11 +27,11 @@ export default function Hero() {
           </svg>
         </div>
 
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(5rem, 14vw, 11rem)', lineHeight: 0.9, color: '#FDFCFA', letterSpacing: '0.05em', marginBottom: '0.2rem' }}>FLŌ</h1>
-        <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '0.12em', color: '#C8102E', marginBottom: '1.2rem' }}>Modern Bistro · Riga</h2>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '1rem', fontWeight: 300, color: 'rgba(255,255,255,0.85)', marginBottom: '0.4rem' }}>Bold. Seasonal. Made with passion.</p>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', fontWeight: 400, color: '#C8102E', marginBottom: '0.3rem' }}>Open Late Fri–Sat until 23:30</p>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 600, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '2.5rem' }}>Private Events Available</p>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(5rem, 14vw, 11rem)', lineHeight: 0.9, color: '#FDFCFA', letterSpacing: '0.05em', marginBottom: '0.2rem' }}>{restaurant.name}</h1>
+        <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '0.12em', color: '#C8102E', marginBottom: '1.2rem' }}>{restaurant.tagline}</h2>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '1rem', fontWeight: 300, color: 'rgba(255,255,255,0.85)', marginBottom: '0.4rem' }}>{restaurant.description}</p>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', fontWeight: 400, color: '#C8102E', marginBottom: '0.3rem' }}>{restaurant.highlight1}</p>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 600, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '2.5rem' }}>{restaurant.highlight2}</p>
 
         {/* Pill buttons */}
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -52,7 +53,7 @@ export default function Hero() {
             </svg>
             View Menu
           </a>
-          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FDFCFA', background: 'rgba(255,255,255,0.1)', border: '1.5px solid rgba(255,255,255,0.4)', padding: '0.85rem 2rem', borderRadius: '999px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backdropFilter: 'blur(4px)', transition: 'all 0.2s' }}
+          <a href={restaurant.mapsLink} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FDFCFA', background: 'rgba(255,255,255,0.1)', border: '1.5px solid rgba(255,255,255,0.4)', padding: '0.85rem 2rem', borderRadius: '999px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backdropFilter: 'blur(4px)', transition: 'all 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.background = 'rgba(255,255,255,0.2)' }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.background = 'rgba(255,255,255,0.1)' }}>
             {/* Pin SVG */}
@@ -66,7 +67,7 @@ export default function Hero() {
         {/* Social icons — custom SVGs */}
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '2.5rem' }}>
           {/* Phone */}
-          <a href="tel:+37127012661" style={{ width: '42px', height: '42px', borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'rgba(255,255,255,0.7)', transition: 'all 0.2s' }}
+          <a href={`tel:${restaurant.phone}`} style={{ width: '42px', height: '42px', borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'rgba(255,255,255,0.7)', transition: 'all 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = '#C8102E'; e.currentTarget.style.color = '#C8102E'; e.currentTarget.style.transform = 'scale(1.1)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; e.currentTarget.style.transform = 'scale(1)' }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -74,7 +75,7 @@ export default function Hero() {
             </svg>
           </a>
           {/* Instagram */}
-          <a href="https://instagram.com/floresto.lv" target="_blank" rel="noopener noreferrer" style={{ width: '42px', height: '42px', borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'rgba(255,255,255,0.7)', transition: 'all 0.2s' }}
+          <a href={restaurant.instagram} target="_blank" rel="noopener noreferrer" style={{ width: '42px', height: '42px', borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'rgba(255,255,255,0.7)', transition: 'all 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = '#C8102E'; e.currentTarget.style.color = '#C8102E'; e.currentTarget.style.transform = 'scale(1.1)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; e.currentTarget.style.transform = 'scale(1)' }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

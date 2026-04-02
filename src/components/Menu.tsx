@@ -1,31 +1,17 @@
 'use client'
 import { useState } from 'react'
 import FadeIn from './FadeIn'
+import useIsMobile from '@/hooks/useIsMobile'
+import { restaurant } from '@/config/restaurant'
 
-const menuData = {
-  Starters: [
-    { name: 'Artsy Tartare', desc: 'Avocado, ponzu, sesame crisp, microgreens', price: '€18', img: '/images/artsy tartar.jpg' },
-    { name: 'Pretty Bowl', desc: 'Seasonal vegetables, tahini, herbs, cold-pressed oil', price: '€14', img: '/images/pretty-bowl.jpg' },
-    { name: 'White Bowl', desc: 'Cold-pressed olive oil, basil oil, sea salt flakes', price: '€16', img: '/images/white bowl.jpg' },
-  ],
-  Mains: [
-    { name: 'Pan-Seared Sea Bass', desc: 'Cauliflower purée, capers, brown butter, lemon', price: '€26', img: '/images/white bowl.jpg' },
-    { name: 'Dry-Aged Ribeye', desc: '28-day aged, bone marrow butter, truffle fries', price: '€38', img: '/images/artsy tartar.jpg' },
-    { name: 'Wild Mushroom Risotto', desc: 'Porcini, aged Parmesan, truffle oil, chives', price: '€22', img: '/images/pretty-bowl.jpg' },
-  ],
-  Desserts: [
-    { name: 'Crème Brûlée', desc: 'Vanilla bean, caramelised crust, seasonal berries', price: '€10', img: '/images/white bowl.jpg' },
-    { name: 'Dark Chocolate Fondant', desc: 'Salted caramel core, vanilla ice cream', price: '€12', img: '/images/pretty-bowl.jpg' },
-    { name: 'Tiramisu', desc: 'Mascarpone, espresso-soaked ladyfingers, cocoa', price: '€11', img: '/images/artsy tartar.jpg' },
-  ],
-}
-
+const menuData = restaurant.menu
 const tabs = Object.keys(menuData) as (keyof typeof menuData)[]
 
 export default function Menu() {
+  const isMobile = useIsMobile()
   const [active, setActive] = useState<keyof typeof menuData>('Starters')
   return (
-    <section id="menu" style={{ background: '#FDFCFA', padding: '7rem 2rem' }}>
+    <section id="menu" style={{ background: '#FDFCFA', padding: isMobile ? '3rem 1.5rem' : '7rem 2rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
       <FadeIn>
         <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
@@ -44,7 +30,7 @@ export default function Menu() {
         </div>
       </FadeIn>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.5rem' }}>
         {menuData[active].map((item, i) => (
           <FadeIn key={item.name} delay={i * 0.1}>
             <div style={{ background: '#F8F4EF', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(200,16,46,0.15)', transition: 'transform 0.3s, border-color 0.3s' }}
