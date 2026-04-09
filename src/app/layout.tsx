@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'FLŌ Restaurant — Riga',
-  description: 'A modern bistro on the banks of the Daugava.',
+  title: 'Bouquets by Liz — NYC Flowers & Floral Arrangements',
+  description: 'Bold, handcrafted bouquets, event decor, and floral arrangements delivered across all 5 boroughs of NYC.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

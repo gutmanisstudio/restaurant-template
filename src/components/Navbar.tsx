@@ -3,7 +3,13 @@ import { useEffect, useState } from 'react'
 import useIsMobile from '@/hooks/useIsMobile'
 import { restaurant } from '@/config/restaurant'
 
-const links = ['Home', 'About', 'Menu', 'Gallery', 'Reviews', 'Contact']
+const links = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Reviews', href: '/services' },
+  { label: 'Products', href: '/products' },
+  { label: 'Contact', href: '/contact' },
+]
 
 export default function Navbar() {
   const isMobile = useIsMobile()
@@ -21,29 +27,26 @@ export default function Navbar() {
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       padding: '0 3rem',
       height: '70px',
-      background: 'rgba(10,5,5,0.92)',
+      background: 'rgba(10,10,10,0.92)',
       backdropFilter: 'blur(16px)',
-      borderBottom: '1px solid rgba(200,16,46,0.2)',
+      borderBottom: '1px solid rgba(180,127,212,0.2)',
     }}>
       {/* Logo SVG */}
-      <a href="#home" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="23" stroke="#C8102E" strokeWidth="1.5"/>
-          <text x="24" y="31" textAnchor="middle" fontFamily="'Bebas Neue', sans-serif" fontSize="18" letterSpacing="3" fill="#FDFCFA">FLŌ</text>
-        </svg>
+      <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <img src="/images/logo.jpg" alt="Bouquets by Liz" style={{ height: '40px', width: 'auto' }} />
       </a>
 
       <ul style={{ display: isMobile ? 'none' : 'flex', gap: '2rem', listStyle: 'none' }}>
         {links.map(l => (
-          <li key={l}>
-            <a href={`#${l.toLowerCase()}`} style={{
+          <li key={l.label}>
+            <a href={l.href} style={{
               fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 500,
               letterSpacing: '0.12em', textTransform: 'uppercase',
               color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: 'color 0.2s',
             }}
-              onMouseEnter={e => e.currentTarget.style.color = '#C8102E'}
+              onMouseEnter={e => e.currentTarget.style.color = '#B47FD4'}
               onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}
-            >{l}</a>
+            >{l.label}</a>
           </li>
         ))}
       </ul>
@@ -51,7 +54,7 @@ export default function Navbar() {
       <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
         {/* Phone SVG icon */}
         <a href={`tel:${restaurant.phone}`} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.color = '#C8102E'}
+          onMouseEnter={e => e.currentTarget.style.color = '#B47FD4'}
           onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -63,17 +66,17 @@ export default function Navbar() {
         <a href="#reserve" style={{
           fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 700,
           letterSpacing: '0.1em', textTransform: 'uppercase',
-          color: '#FDFCFA', background: '#C8102E',
+          color: '#F5F0EB', background: '#B47FD4',
           padding: '0.6rem 1.5rem', borderRadius: '999px', textDecoration: 'none',
           transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem',
         }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#8B0A1F'; e.currentTarget.style.transform = 'scale(1.04)' }}
-          onMouseLeave={e => { e.currentTarget.style.background = '#C8102E'; e.currentTarget.style.transform = 'scale(1)' }}
+          onMouseEnter={e => { e.currentTarget.style.background = '#8B5FA8'; e.currentTarget.style.transform = 'scale(1.04)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#B47FD4'; e.currentTarget.style.transform = 'scale(1)' }}
         >
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
-          Reserve Online
+          Order Now
         </a>
       </div>
     </nav>

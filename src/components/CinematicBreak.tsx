@@ -1,22 +1,43 @@
 'use client'
+import FadeIn from './FadeIn'
+import useIsMobile from '@/hooks/useIsMobile'
 import { restaurant } from '@/config/restaurant'
 
 export default function CinematicBreak() {
+  const isMobile = useIsMobile()
   return (
-    <section style={{ position: 'relative', height: '70vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <video autoPlay loop muted playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-        <source src={restaurant.cinematicVideo} type="video/mp4" />
-      </video>
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,5,5,0.5), rgba(200,16,46,0.6))', zIndex: 1 }} />
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 2rem' }}>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '1rem' }}>Crafted With Passion</p>
-        <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '0.08em', color: '#FDFCFA', lineHeight: 1, marginBottom: '1rem' }}>
-          EVERY DISH<br /><span style={{ color: '#FDFCFA', WebkitTextStroke: '1px rgba(255,255,255,0.4)', WebkitTextFillColor: 'transparent' }}>TELLS A STORY</span>
-        </h2>
-        <a href="#menu" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.12)', color: '#FDFCFA', fontFamily: "'DM Sans', sans-serif", fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0.85rem 2rem', borderRadius: '999px', textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.35)', backdropFilter: 'blur(8px)', transition: 'all 0.2s' }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#C8102E'; e.currentTarget.style.borderColor = '#C8102E' }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)' }}
-        >View Full Menu →</a>
+    <section style={{ background: '#111111', padding: isMobile ? '3rem 1.5rem' : '7rem 4rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '2.5rem' : '5rem', alignItems: 'center' }}>
+
+        <FadeIn direction="left">
+          <div>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#B47FD4', marginBottom: '1rem' }}>Crafted With Love</p>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3rem, 6vw, 5rem)', letterSpacing: '0.08em', color: '#F5F0EB', lineHeight: 1, marginBottom: '0.5rem' }}>
+              EVERY BOUQUET
+            </h2>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3rem, 6vw, 5rem)', letterSpacing: '0.08em', color: '#B47FD4', lineHeight: 1, marginBottom: '1.5rem' }}>
+              TELLS A STORY
+            </h2>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', fontWeight: 300, color: '#9A9090', lineHeight: 1.8, marginBottom: '2rem' }}>
+              From bold letter bouquets to full hotel room transformations — every arrangement is handcrafted with care and delivered across all 5 boroughs.
+            </p>
+            <a href="/products" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#B47FD4', color: '#F5F0EB', fontFamily: "'DM Sans', sans-serif", fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0.85rem 2rem', borderRadius: '999px', textDecoration: 'none', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#8B5FA8'; e.currentTarget.style.transform = 'scale(1.04)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#B47FD4'; e.currentTarget.style.transform = 'scale(1)' }}
+            >Browse Our Work →</a>
+          </div>
+        </FadeIn>
+
+        <FadeIn direction="right" delay={0.15}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', maxWidth: '320px', aspectRatio: '9/16', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 30px 80px rgba(180,127,212,0.12)' }}>
+              <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+                <source src={restaurant.cinematicVideo} type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </FadeIn>
+
       </div>
     </section>
   )

@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --red: #C8102E;
-  --red-dark: #8B0A1F;
-  --white: #FDFCFA;
-  --cream: #F8F4EF;
-  --black: #0E0A08;
-  --gray: #6B6460;
+  --red: #B47FD4;
+  --red-dark: #8B5FA8;
+  --white: #F5F0EB;
+  --cream: #111111;
+  --black: #F5F0EB;
+  --gray: #9A9090;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: #FDFCFA; color: #0E0A08; overflow-x: hidden; font-family: 'DM Sans', sans-serif; }
+body { background: #0A0A0A; color: #F5F0EB; overflow-x: hidden; font-family: 'DM Sans', sans-serif; }
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #F8F4EF; }
-::-webkit-scrollbar-thumb { background: #C8102E; }
-::selection { background: #C8102E; color: #FDFCFA; }
+::-webkit-scrollbar-track { background: #111111; }
+::-webkit-scrollbar-thumb { background: #B47FD4; }
+::selection { background: #B47FD4; color: #F5F0EB; }
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
